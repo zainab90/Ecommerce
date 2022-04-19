@@ -1,0 +1,26 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+<table>
+
+
+    <tbody>
+    {%for item in active_list%}
+<tr>
+
+    <td>{{item.title}}</td>
+    <td>{{item.description}}</td>
+    <td>${{item.price}}</td>
+    <td><img src="{{item.imgurl}}" height="300" width="300" alt="img"></td>
+
+</tr>
+{% endfor %}
+    </tbody>
+
+
+
+
+</table>
+
+{% endblock %}

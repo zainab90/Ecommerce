@@ -1,0 +1,86 @@
+{% extends "auctions/layout.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block body %}
+
+<table>
+
+
+    <tbody>
+        {%for item in active_list%}
+
+     <tr>
+        <td>
+            <form>
+                <button type="submit"> Add to WatchList</button>
+            </form>
+        </td>
+
+    </tr>
+
+<tr>
+    <td><img src="{{item.imgurl}}" height="300" width="300" alt="img"></td>
+          <td>
+    <p>{{item.title}}</p>
+    <p>{{item.description}}</p>
+    <p>${{item.price}}</p>
+     <p>{{item.catogery}}</p>
+     <p>{{item.date}}</p>
+     <p>{{item.active}}</p>
+</td>
+    </tr>
+       <br>
+
+
+
+
+
+    <tr>
+        <td style="border-top:1px solid blue">
+            <form action="{% url 'add-bid' id %}" method="post">
+                <h5>{{item.start_bid}}  Bid(s) so far. Your bid is the current bid</h5>
+                    {% csrf_token %}
+                {{ bidForm|crispy }}
+                <button class="btn btn-primary " type="submit">Place Bid</button>
+            </form>
+        </td>
+
+    </tr>
+
+
+       <tr>
+        <td style="border-top:1px solid green">
+            <form action="{% url 'add-comment' id %}" method="post">
+                <h5>Comment</h5>
+                    {% csrf_token %}
+                {{ commentForm|crispy }}
+                <button class="btn btn-primary " type="submit">Add Comment </button>
+            </form>
+        </td>
+    </tr>
+
+
+              <tr>
+        <td style="border-top:1px solid red">
+         <h5 style="color:red"> Previous Comments</h5>
+               {%for item in comment_list%}
+            <p>{{item.comments}}</p>
+            {% endfor%}
+        </td>
+    </tr>
+
+
+
+{% endfor %}
+
+    </tbody>
+
+
+
+
+</table>
+
+
+
+
+{% endblock%}

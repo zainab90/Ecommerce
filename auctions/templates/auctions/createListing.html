@@ -1,0 +1,75 @@
+{% extends "auctions/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+    <h2>Create Listing</h2>
+<p>{{m}}</p>
+   <form action="{% url 'add-listing' %}" method="post">
+                {% csrf_token %}
+<!--                {{ creatForm|crispy }}-->
+    <div calss="row">
+                <div calss="col-6">
+                    {{creatForm.title |as_crispy_field}}
+                </div>
+                  <div calss="col-6">
+                    {{creatForm.description |as_crispy_field}}
+                </div>
+            </div>
+
+
+            <div calss="row">
+                   <div calss="col-6">
+                    {{creatForm.imgurl |as_crispy_field}}
+                </div>
+
+            </div>
+
+
+
+           <div calss="row">
+                   <div calss="col-6">
+                    {{creatForm.date |as_crispy_field}}
+                </div>
+                   <div calss="col-6">
+                    {{creatForm.price |as_crispy_field}}
+                </div>
+            </div>
+
+
+
+
+
+           <div calss="row">
+                   <div calss="col-6" >
+                    {{creatForm.user |as_crispy_field}}
+                </div>
+                   <div calss="col-6">
+                    {{creatForm.catogery |as_crispy_field}}
+                </div>
+            </div>
+
+           <div calss="row" >
+
+                   <div calss="col-4">
+                    {{creatForm.start_bid |as_crispy_field}}
+                </div>
+                    <div calss="col-4">
+                    {{creatForm.last_bid |as_crispy_field}}
+                </div>
+
+            </div>
+
+
+
+
+                <button class="btn btn-primary " type="submit"> Listing</button>
+
+
+
+
+
+
+
+   </form>
+
+{% endblock %}
