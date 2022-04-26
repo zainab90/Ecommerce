@@ -3,75 +3,223 @@
 {% load static %}
 {% block body %}
 
-<table>
+<div class="page-body">
+
+    <div class="container-xl">
+        <div class="row row-cards" style="display:{{winner}}">
+                  <div class="col-1"></div>
+            <div class="col-10">  <div class="card">
+                <div class="card-header py-3 ">
+                    <div class="card-title">The Item is Closed</div>
+                </div>
+
+                <div class="card-body" >
+                    <div class=" alert-success p-3">
+                            Great.. The Winner is
+                    {{winner_name}}
+                    </div>
 
 
-    <tbody>
+
+                </div>
+
+
+            </div>
+
+
+            </div>
+                  <div class="col-1"></div>
+
+
+           </div>
+<div class="row row-cards" style="display:{{item_body}}">
+    <div class="col-1">
+    </div>
+    <div class="col-10">
+     <div class="card">
+           <div class="card-header py-4 ">
+
+
+                   <h1 class="card-title">Auction Item</h1>
+
+
+                     <div class="ribbon ribbon-top bg-yellow" style=" font-size: 0.875em; visibility:{{remove_stats}}"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="{{fill_stat}}" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path></svg>
+                      <form action="{% url 'add-watch-list' id%}">      <button type="submit" name="btn"  class=" my-btn-yellow" > {{btn_value}}</button>
+</form>
+
+
+</div>
+
+
+
+           </div>
+
+
+
+ <div class="card-body" >
+
+         <div class="table-responsive" >
+                      <table class="table table-vcenter card-table text-center" >
+
+
         {%for item in active_list%}
 
-     <tr>
-        <td>
-            <form>
-                <button type="submit"> Add to WatchList</button>
-            </form>
-        </td>
 
-    </tr>
 
-<tr>
-    <td><img src="{{item.imgurl}}" height="300" width="300" alt="img"></td>
-          <td>
-    <p>{{item.title}}</p>
-    <p>{{item.description}}</p>
-    <p>${{item.price}}</p>
+<!--<tr>-->
+<!--    <td><img src="{{item.imgurl}}" height="300" width="300" alt="img"></td>-->
+<!--          <td>-->
+<!--    <p>Item Title : {{item.title}}</p>-->
+<!--    <p>Item Description :{{item.description}}</p>-->
+<!--    <p>{{item.price}} $</p>-->
+<!--     <p>{{item.catogery}}</p>-->
+<!--     <p>{{item.date}}</p>-->
+<!--</td>-->
+<!--    </tr>-->
+
+
+
+<div class="col-12">
+                <div class="card bg-form" >
+                  <div class="row">
+                    <div class="col-3">
+                        <a href="{% url 'show-listing' item.id %}"> <img src="{{item.imgurl}}" class="w-100 h-100 object-cover" alt="Card side image"></a>
+                    </div>
+                    <div  class="col ">
+                      <div class="card-body">
+                        <h3 class="card-title">{{item.title}}</h3>
+
+    <p>Item Description :{{item.description}}</p>
+    <p>{{item.price}} $</p>
      <p>{{item.catogery}}</p>
      <p>{{item.date}}</p>
-     <p>{{item.active}}</p>
-</td>
-    </tr>
-       <br>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
 
 
 
 
-    <tr>
-        <td style="border-top:1px solid blue">
-            <form action="{% url 'add-bid' id %}" method="post">
-                <h5>{{item.start_bid}}  Bid(s) so far. Your bid is the current bid</h5>
-                    {% csrf_token %}
+
+
+
+
+
+                          <div class="col-12">
+              <div class="card">
+                   <form action="{% url 'show-listing' id %}" method="post">
+                <div class="card-body">
+
+
+                  <h3 class="card-title">Bills</h3>
+                  <p class="card-subtitle">Place Bid Please!!. the current Bid is {{item.start_bid}}</p>
+                {% csrf_token %}
                 {{ bidForm|crispy }}
-                <button class="btn btn-primary " type="submit">Place Bid</button>
-            </form>
-        </td>
+                </div>
+                <div class="card-footer">
+                  <div class="row align-items-center">
+                    <div class="col {{txt_color}}"> <h5>{{message}}  </h5></div>
+                    <div class="col-auto">
+          <button class="btn btn-primary " {{bid_status}} type="submit">Place Bid</button>
 
-    </tr>
-
-
-       <tr>
-        <td style="border-top:1px solid green">
-            <form action="{% url 'add-comment' id %}" method="post">
-                <h5>Comment</h5>
-                    {% csrf_token %}
-                {{ commentForm|crispy }}
-                <button class="btn btn-primary " type="submit">Add Comment </button>
-            </form>
-        </td>
-    </tr>
-
-
-              <tr>
-        <td style="border-top:1px solid red">
-         <h5 style="color:red"> Previous Comments</h5>
-               {%for item in comment_list%}
-            <p>{{item.comments}}</p>
-            {% endfor%}
-        </td>
-    </tr>
-
+                    </div>
+                  </div>
+                </div>
+                   </form>
+              </div>
+            </div>
 
 
 {% endfor %}
+
+
+
+
+
+<br>
+
+                            <div class="col-12">
+              <div class="card">
+   <form action="{% url 'add-comment' id %}" method="post">
+       <div class="card-body">
+
+
+                  <h3 class="card-title">Comments</h3>
+                  <p class="card-subtitle">Add Comment Please!!.</p>
+                {% csrf_token %}
+                {{ commentForm|crispy }}
+                </div>
+                <div class="card-footer">
+                  <div class="row align-items-center">
+                                  <div class="col {{txt_color}}"> <h5>{{mess_comment}}  </h5></div>
+                    <div class="col-auto">
+          <button class="btn btn-primary "  {{add_status}} type="submit">Add Comment </button>
+
+                    </div>
+                  </div>
+                </div>
+                   </form>
+              </div>
+            </div>
+
+
+
+
+
+
+
+<br>
+
+                          <div class="col-12">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">List of commits</h3>
+                      </div>
+                      <div class="list-group list-group-flush list-group-hoverable">
+                           {%for item in comment_list%}
+                        <div class="list-group-item">
+                          <div class="row align-items-center">
+
+                            <div class="col-auto">
+                              <a href="#">
+                                <span class="avatar" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff9300" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <circle cx="12" cy="12" r="9" />
+  <circle cx="12" cy="10" r="3" />
+  <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+</svg>
+                                </span>
+                              </a>
+                            </div>
+                            <div class="col text-truncate">
+                              <a href="#" class="text-reset d-block">{{item.user.username}}</a>
+                              <div class="d-block text-muted text-truncate mt-n1">{{item.comments}}</div>
+                            </div>
+                            <div class="col-auto">
+                              <a href="#" class="list-group-item-actions"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path></svg>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+ {% endfor%}
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+
+
 
     </tbody>
 
@@ -79,6 +227,58 @@
 
 
 </table>
+
+
+
+
+                </div>
+              </div>
+
+
+
+
+</div>
+
+<!--        footer-->
+<br>
+        <div class="row-card"  style="display:{{close_btn}}">
+            <div class="card card-md">
+                  <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col">
+                        <h2 class="h3">Close Item</h2>
+                        <p class="m-0 text-muted">Tabler is designed to work great for large enterprises. Take a look at our feature comparison.</p>
+                      </div>
+                      <div class="col-auto">
+
+<form action="{% url 'close-listing' id  %}">
+                    <button type="submit" name="btn_close"  class="btn btn-danger w-100" {{close_status}}  > Close Item</button>
+
+</form>
+
+
+
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        </div>
+
+
+
+    </div>
+    <div class="col-1"></div>
+</div>
+
+
+
+
+
+
+</div>
+</div>
 
 
 

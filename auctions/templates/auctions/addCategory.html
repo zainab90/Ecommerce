@@ -1,11 +1,24 @@
 {% extends "auctions/layout.html" %}
+{% load static %}
 {% load crispy_forms_tags %}
 
 {% block body %}
+<div class="page-body">
+<div class="container-xl">
 
+    <div class=" row-cards">
+          <h4>Add New Category</h4>
+ <div class="card bg-form">
+        <div class="card-body ">
   <form action="{% url 'add-category' %}" method="post">
                 {% csrf_token %}
                 {{ creatCategForm|crispy }}
                 <button class="btn btn-primary " type="submit">Add Category </button>
             </form>
+               </div>
+ </div>
+
+    </div>
+</div>
+</div>
 {% endblock%}

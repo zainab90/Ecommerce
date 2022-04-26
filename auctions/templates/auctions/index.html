@@ -1,26 +1,64 @@
 {% extends "auctions/layout.html" %}
-
+{% load static %}
 {% block body %}
     <h2>Active Listings</h2>
-<table>
-
-
-    <tbody>
+<div class="page-body">
+<div class="container-xl">
+    <div class="row ">
     {%for item in active_list%}
-<tr>
+        <div class="col-6">
+                <div class="card bg-form" >
+                  <div class="row">
+                    <div class="col-3">
+                        <a href="{% url 'show-listing' item.id %}"> <img src="{{item.imgurl}}" class="w-100 h-100 object-cover" alt="Card side image"></a>
+                    </div>
+                    <div  class="col">
+                      <div class="card-body">
+                        <h3 class="card-title">{{item.title}}</h3>
+                        <p class="text-muted">{{item.description}}.</p>
+                          <p class="text-muted">${{item.price}}.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-    <td>{{item.title}}</td>
-    <td>{{item.description}}</td>
-    <td>${{item.price}}</td>
-    <td><img src="{{item.imgurl}}" height="300" width="300" alt="img"></td>
 
-</tr>
+
 {% endfor %}
-    </tbody>
+
+  </div>
+</div>
+
+
+</div>
+
+
+<!--<table>-->
+
+
+<!--    <tbody>-->
+<!--    {%for item in active_list%}-->
+<!--<tr>-->
+
+<!--       <td>{{item.title}}</td>-->
+<!--    <td>{{item.description}}</td>-->
+<!--    <td>${{item.price}}</td>-->
+<!--    <td><a href="{% url 'show-listing' item.id %}"><img src="{{item.imgurl}}" height="300" width="300" alt="img"></a></td>-->
+
+
+<!--</tr>-->
+<!--{% endfor %}-->
+<!--    </tbody>-->
 
 
 
 
-</table>
+<!--</table>-->
+
+
+
+
+
 
 {% endblock %}

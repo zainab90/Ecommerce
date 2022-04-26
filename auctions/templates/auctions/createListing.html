@@ -1,9 +1,17 @@
 {% extends "auctions/layout.html" %}
+{% load static %}
 {% load crispy_forms_tags %}
 
 {% block body %}
-    <h2>Create Listing</h2>
+
+<div class="page-body">
+<div class="container-xl">
+
+    <div class=" row-cards">
+        <h4>Create New Listing</h4>
 <p>{{m}}</p>
+        <div class="card bg-form">
+        <div class="card-body">
    <form action="{% url 'add-listing' %}" method="post">
                 {% csrf_token %}
 <!--                {{ creatForm|crispy }}-->
@@ -41,28 +49,21 @@
 
            <div calss="row">
                    <div calss="col-6" >
-                    {{creatForm.user |as_crispy_field}}
                 </div>
                    <div calss="col-6">
                     {{creatForm.catogery |as_crispy_field}}
                 </div>
             </div>
 
-           <div calss="row" >
-
-                   <div calss="col-4">
-                    {{creatForm.start_bid |as_crispy_field}}
-                </div>
-                    <div calss="col-4">
-                    {{creatForm.last_bid |as_crispy_field}}
-                </div>
-
-            </div>
 
 
+<div class="row">
+    <div class="col-12 text-center">
+          <button class="btn btn-primary  px-4" type="submit"> Create Listing</button>
+    </div>
+</div>
 
 
-                <button class="btn btn-primary " type="submit"> Listing</button>
 
 
 
@@ -71,5 +72,10 @@
 
 
    </form>
+   </div>
+ </div>
 
+    </div>
+</div>
+</div>
 {% endblock %}
