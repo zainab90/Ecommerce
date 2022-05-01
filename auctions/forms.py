@@ -32,7 +32,6 @@ class AuctionForm (forms.ModelForm):
             'imgurl',
             'date',
             'price',
-
             'catogery',
 
         ]

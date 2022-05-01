@@ -180,7 +180,7 @@ def close_listing(request,id):
                    'item_body': 'none'
                    })
 
-@login_required
+
 def show_listing(request,id):
     message=''
     txt_color='text-primary'
